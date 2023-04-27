@@ -1,0 +1,1 @@
+# DynamoDB API gateway crud using aws lambda
