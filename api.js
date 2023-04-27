@@ -19,12 +19,12 @@ const getPost = async (event) => {
       Key: marshall({ postId: event.pathParameters.postId }),
     };
 
-    const { Item } = await db.send(new GetItemCommand(params));
+    const { item } = await db.send(new GetItemCommand(params));
 
-    console.log("Item:: ", { Item });
+    console.log("Item:: ", { item });
     response.body = JSON.stringify({
       message: "Success",
-      data: Item ? unmarshall(Item) : {},
+      data: item ? unmarshall(item) : {},
     });
   } catch (e) {
     console.error(" Error from get Post ", e);
@@ -145,13 +145,13 @@ const getAllPosts = async (event) => {
   const response = { statusCode: 200 };
 
   try {
-    const { Items } = await db.send(
+    const { items } = await db.send(
       new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME })
     );
 
     response.body = JSON.stringify({
       message: "Successfully retrieved all Post",
-      data: Item.map((item) => unmarshall(item)),
+      data: items.map((item) => unmarshall(item)),
     });
   } catch (e) {
     response.statusCode = 500;
