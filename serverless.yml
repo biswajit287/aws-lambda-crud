@@ -24,11 +24,11 @@ functions:
       - http:
           path: post/{postId}
           method: GET
-    # iamRoleStatements:
-    #   - Effect: "Allow"
-    #     Action:
-    #       - "dynamodb:GetItem"
-        # Resources: !GetAtt PostsTable.arn
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:GetItem"
+        Resources: "*"
 
   createPost:
     handler: api.createPost
@@ -39,11 +39,11 @@ functions:
       - http:
           path: post
           method: POST
-    # iamRoleStatements:
-    #   - Effect: "Allow"
-    #     Action:
-    #       - "dynamodb:PutItem"
-        # Resources: !GetAtt PostsTable.arn
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:PutItem"
+        Resources: "*"
 
   updatePost:
     handler: api.updatePost
@@ -54,11 +54,11 @@ functions:
       - http:
           path: post/{postId}
           method: PUT
-    # iamRoleStatements:
-    #   - Effect: "Allow"
-    #     Action:
-    #       - "dynamodb:UpdateItem"
-        # Resources: !GetAtt PostsTable.arn
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:UpdateItem"
+        Resources: "*"
 
   deletePost:
     handler: api.deletePost
@@ -69,11 +69,11 @@ functions:
       - http:
           path: post/{postId}
           method: DELETE
-    # iamRoleStatements:
-    #   - Effect: "Allow"
-    #     Action:
-    #       - "dynamodb:DeleteItem"
-        # Resources: !GetAtt PostsTable.arn
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:DeleteItem"
+        Resources: "*"
 
   getAllPosts:
     handler: api.getAllPosts
@@ -84,28 +84,12 @@ functions:
       - http:
           path: get-all-posts
           method: GET 
-    # iamRoleStatements:
-    #   - Effect: "Allow"
-    #     Action:
-    #       - "dynamodb:Scan"
-        # Resources: !GetAtt PostsTable.arn
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:Scan"
+        Resources: "*"
 
-
-# resources:
-#   Resources:
-#     PostsTable: 
-#       Type: AWS:DynamoDB::Table
-#       Properties:
-#         TableName: posts-table-${self:provider.stage}
-#         AttributesDefinitions:
-#           - AttributeName: postId
-#             AttributeType: S
-#         KeySchema:
-#           - AttributeName: postId
-#             KeyType: HASH 
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 1
-#           WriteCapacityUnits: 1
 
 resources:
   Resources:
