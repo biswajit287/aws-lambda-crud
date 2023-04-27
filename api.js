@@ -26,7 +26,7 @@ const getPost = async (event) => {
       message: "Success",
       data: Item ? unmarshall(Item) : {},
     });
-  } catch (error) {
+  } catch (e) {
     console.error(" Error from get Post ", e);
     response.statusCode = 500;
     response.body = JSON.stringify({
@@ -55,7 +55,7 @@ const createPost = async (event) => {
       message: "Successfully Created Post",
       createResult,
     });
-  } catch (error) {
+  } catch (e) {
     response.statusCode = 500;
     response.body = JSON.stringify({
       message: "Failed to create post.",
@@ -102,7 +102,7 @@ const updatePost = async (event) => {
       message: "Successfully Updated Post",
       updateResult,
     });
-  } catch (error) {
+  } catch (e) {
     response.statusCode = 500;
     response.body = JSON.stringify({
       message: "Failed to update post.",
@@ -129,7 +129,7 @@ const deletePost = async (event) => {
       message: "Successfully Deleted Post",
       deleteResult,
     });
-  } catch (error) {
+  } catch (e) {
     response.statusCode = 500;
     response.body = JSON.stringify({
       message: "Failed to delete post.",
@@ -153,7 +153,7 @@ const getAllPosts = async (event) => {
       message: "Successfully retrieved all Post",
       data: Item.map((item) => unmarshall(item)),
     });
-  } catch (error) {
+  } catch (e) {
     response.statusCode = 500;
     response.body = JSON.stringify({
       message: "Failed to get all post.",
