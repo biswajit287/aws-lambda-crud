@@ -96,7 +96,7 @@ provider:
       PostsTable: 
         Type: AWS:DynamoDB::Table
         Properties:
-        TableName: ${self:custom.postsTableName}
+        TableName: posts-table-${self:provider.stage}
         AttributesDefinitions:
           - AttributeName: postId
             AttributeType: S
