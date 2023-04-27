@@ -28,7 +28,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:GetItem"
-        Resources: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
+        Resource: "*"
 
   createPost:
     handler: api.createPost
@@ -43,7 +43,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:PutItem"
-        Resources: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
+        Resource: "*"
 
   updatePost:
     handler: api.updatePost
@@ -58,7 +58,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:UpdateItem"
-        Resources: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
+        Resource: "*"
 
   deletePost:
     handler: api.deletePost
@@ -73,7 +73,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:DeleteItem"
-        Resources: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
+        Resource: "*"
 
   getAllPosts:
     handler: api.getAllPosts
@@ -88,7 +88,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:Scan"
-        Resources: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
+        Resource: "*"
 
 
 resources:
