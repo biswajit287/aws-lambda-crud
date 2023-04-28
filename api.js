@@ -43,9 +43,10 @@ const createPost = async (event) => {
   const response = { statusCode: 200 };
 
   try {
+    const requestBody = JSON.parse(event.body);
     const params = {
       TableName: process.env.DYNAMODB_TABLE_NAME,
-      Item: marshall(body || {}),
+      Item: marshall(requestBody || {}),
     };
 
     const createResult = await db.send(new PutItemCommand(params));
@@ -71,6 +72,9 @@ const updatePost = async (event) => {
   const response = { statusCode: 200 };
 
   try {
+    const requestBody = JSON.parse(event.body);
+    const objKeys = Object.keys(requestBody);
+
     const params = {
       TableName: process.env.DYNAMODB_TABLE_NAME,
       Key: marshall({ postId: event.pathParameters.postId }),
@@ -88,7 +92,7 @@ const updatePost = async (event) => {
         objKeys.reduce(
           (acc, key, index) => ({
             ...acc,
-            [`:value${index}`]: body[key],
+            [`:value${index}`]: requestBody[key],
           }),
           {}
         )
