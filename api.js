@@ -150,15 +150,15 @@ const getAllPosts = async (event) => {
   const response = { statusCode: 200 };
 
   try {
-    const response = await db.send(
+    const allItems = await db.send(
       new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME })
     );
-    let items = response.Items;
-    console.log("items:: ", items);
+    let items = allItems.Items;
     response.body = JSON.stringify({
       message: "Successfully retrieved all Post",
       data: items ? items.map((item) => unmarshall(item)) : [],
     });
+    console.log("response items:: ", response);
   } catch (e) {
     response.statusCode = 500;
     response.body = JSON.stringify({
