@@ -12,16 +12,17 @@ const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const getPost = async (event) => {
   const response = { statusCode: 200 };
-
+  console.log("event:: ", event);
+  console.log("event post id:: ", event.pathParameters.postId);
   try {
     const params = {
       TableName: process.env.DYNAMODB_TABLE_NAME,
       Key: marshall({ postId: event.pathParameters.postId }),
     };
-
-    const { item } = await db.send(new GetItemCommand(params));
-
-    console.log("Item:: ", { item });
+    console.log("Params: ", params);
+    const body = await db.send(new GetItemCommand(params));
+    item = body.Item;
+    console.log("Item:: ", body);
     response.body = JSON.stringify({
       message: "Success",
       data: item ? unmarshall(item) : {},
@@ -101,7 +102,7 @@ const updatePost = async (event) => {
 
     const updateResult = await db.send(new UpdateItemCommand(params));
 
-    console.log("Item:: ", { Item });
+    console.log("updated result:: ", { updateResult });
     response.body = JSON.stringify({
       message: "Successfully Updated Post",
       updateResult,
@@ -149,10 +150,11 @@ const getAllPosts = async (event) => {
   const response = { statusCode: 200 };
 
   try {
-    const { items } = await db.send(
+    const response = await db.send(
       new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME })
     );
-
+    let items = response.Items;
+    console.log("items:: ", items);
     response.body = JSON.stringify({
       message: "Successfully retrieved all Post",
       data: items ? items.map((item) => unmarshall(item)) : [],

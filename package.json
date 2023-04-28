@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:local": "serverless invoke local --aws-profile aws-biswajit"
   },
   "author": "",
   "license": "ISC",

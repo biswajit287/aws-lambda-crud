@@ -1,0 +1,6 @@
+{
+  "pathParameters": {
+    "postId": "1"
+  },
+  "body": "{\"content\": \"Hello post updated with new content\",\"author\": \"Biswajit mondal\"}"
+}
