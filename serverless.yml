@@ -43,7 +43,7 @@ functions:
       - Effect: "Allow"
         Action:
           - "dynamodb:PutItem"
-        Resource: !GetAtt PostsTable.Arn
+        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${${self:custom.postsTableName}}"
 
   updatePost:
     handler: api.updatePost

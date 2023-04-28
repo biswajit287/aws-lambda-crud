@@ -151,7 +151,7 @@ const getAllPosts = async (event) => {
 
     response.body = JSON.stringify({
       message: "Successfully retrieved all Post",
-      data: items.map((item) => unmarshall(item)),
+      data: items ? items.map((item) => unmarshall(item)) : [],
     });
   } catch (e) {
     response.statusCode = 500;
